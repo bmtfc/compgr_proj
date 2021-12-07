@@ -1,0 +1,18 @@
+.inputWrapper {
+  display: flex;
+  align-items: center;
+}
+
+.lable {
+  margin-bottom: 0 !important;
+  margin-right: 10px;
+}
+
+.tableHeader {
+  width: 90px;
+  text-align: center;
+}
+
+.tableWrapper {
+  margin-left: 10px;
+}

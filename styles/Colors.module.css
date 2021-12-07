@@ -1,0 +1,13 @@
+.inputsWrapper {
+  display: flex;
+  column-gap: 10px;
+}
+
+.title {
+  margin-top: 30px;
+}
+
+.sliderWrapper {
+  margin-left: 40px;
+  width: 40%;
+}
