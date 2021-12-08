@@ -3,7 +3,7 @@ import { Row, Col, InputNumber } from 'antd';
 import { useRef, useState } from 'react';
 import styles from '../styles/Bfractal.module.css'
 import { multiplyMatrices } from '../utils/matrix';
-import SkeletonInput from 'antd/lib/skeleton/Input';
+
 
 const Triangle = () => {
   const [AX, setAX] = useState(0)
@@ -27,9 +27,6 @@ function sleepFor(sleepDuration){
         const ctx = canvas.current.getContext('2d');
         ctx.globalCompositeOperation = 'destination-over';
         ctx.clearRect(0, 0, 500, 500);
-
-        var A = [[AX+250, AY+250, 1], [BX+250, BY+250, 1], [CX+250, CY+250, 1]]
-
         ctx.beginPath();
         ctx.moveTo(A[0][0], 500-A[0][1]);
         ctx.lineTo(A[1][0], 500-A[1][1]);
@@ -39,42 +36,34 @@ function sleepFor(sleepDuration){
         ctx.fill();
         ctx.restore()
 
-        var x = 20;
-        const M1 = [[0.866, 0.5, 1], [-0.5, 0.866, 1], [1, 1, 0]]
-        const M2 = [[1, 0, 0], [0, 1, 0], [x, x, 1]]
-        console.log(A);
+        const A = [[AX, AY, 1], [BX, BY, 1], [CX, CY, 1]];
+        const x = 25;
+        var k = 1;
 
-        for(var i = 0; i<1; i++ ){
-          A = multiplyMatrices(A, M2);
-          //A = multiplyMatrices(A, M1); // rotate 30deg
-          console.log(A);
+        for(var i = 0; i < 8; i++){
+          var a = k*Math.PI/24;
+          console.log(a);
+          var M1 = [[Math.cos(a), Math.sin(a), 1], [-Math.sin(a), Math.cos(a), 1], [1, 1, 0]]
+          var A1 = multiplyMatrices(A, M1); // rotate 30deg
+          A1[0][0] = A1[0][0] + k*x;
+          A1[0][1] = A1[0][1] + k*x;
+          A1[1][0] = A1[1][0] + k*x;
+          A1[1][1] = A1[1][1] + k*x;
+          A1[2][0] = A1[2][0] + k*x;
+          A1[2][1] = A1[2][1] + k*x;
+          
           ctx.clearRect(0, 0, 500, 500);
           ctx.beginPath();
-          ctx.moveTo(A[0][0], 500-A[0][1]);
-          ctx.lineTo(A[1][0], 500-A[1][1]);
-          ctx.lineTo(A[2][0], 500-A[2][1]);
+          ctx.moveTo(A1[0][0], 500-A1[0][1]);
+          ctx.lineTo(A1[1][0], 500-A1[1][1]);
+          ctx.lineTo(A1[2][0], 500-A1[2][1]);
           ctx.closePath();
           ctx.fillStyle = "#FFCC00";
           ctx.fill();
           ctx.restore()
+          k++;
         }
-
-        /*
-        if(i < 30) {
-          window.requestAnimationFrame(draw);
-        } else {
-          ctx.beginPath();
-          ctx.moveTo(AX, AY);
-          ctx.lineTo(BX, BY);
-          ctx.lineTo(CX, CY);
-          ctx.closePath();
-          ctx.fillStyle = "#FFCC00";
-          ctx.fill();
-          ctx.restore();
-        }
-        */
       }
-
       window.requestAnimationFrame(draw);
     }
   }
