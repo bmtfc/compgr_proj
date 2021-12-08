@@ -3,7 +3,7 @@ import { InputNumber, Typography, Slider } from 'antd';
 import { useRef, useState, useEffect } from 'react';
 import styles from '../styles/Colors.module.css'
 import { cmyk2rgb } from '../utils/cmyk.js';
-import { RGBtoHSV, hsvToHSL, HSVtoRGB } from '../utils/hsv.js';
+import { hsvToHSL, HSVtoRGB } from '../utils/hsv.js';
 
 const { Title } = Typography;
 

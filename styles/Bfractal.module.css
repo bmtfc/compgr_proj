@@ -22,4 +22,6 @@
   margin-left: 150px;
   width: 700px;
   height: 700px;
+  border-width: 1px;
+  border-color: black;
 }
