@@ -1,6 +1,6 @@
 import Sidebar from '../components/sidebar'
 import { Row, Col, InputNumber } from 'antd';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import styles from '../styles/Bfractal.module.css'
 
 const Triangle = () => {
@@ -11,8 +11,56 @@ const Triangle = () => {
   const [CX, setCX] = useState(0)
   const [CY, setCY] = useState(0)
 
+  const canvas = useRef(null)
+
   const onSetClick = (e) => {
-    //TODO build canva
+    let i = 1;
+    let x = 0;
+    let y = 0;
+    if (canvas.current.getContext) {
+      const draw = () => {
+        const ctx = canvas.current.getContext('2d');
+        ctx.globalCompositeOperation = 'destination-over';
+        ctx.clearRect(0, 0, 500, 500);
+
+        const rad = 1 * Math.PI / 180;
+
+        const a = ((Math.PI * 2) / 3);
+
+        ctx.rotate(rad);
+
+        ctx.beginPath();
+        ctx.moveTo(AX, AY);
+        ctx.lineTo(BX, BY);
+        ctx.lineTo(CX, CY);
+        ctx.closePath();
+        ctx.fillStyle = "#FFCC00";
+        ctx.fill();
+
+        ctx.restore();
+        i += 1
+        x -= 0.1
+        y -= 0.1
+
+        if(i < 30) {
+          window.requestAnimationFrame(draw);
+        } else {
+          ctx.translate(x + 0.1 ,y + 0.1);
+
+          ctx.beginPath();
+          ctx.moveTo(AX, AY);
+          ctx.lineTo(BX, BY);
+          ctx.lineTo(CX, CY);
+          ctx.closePath();
+          ctx.fillStyle = "#FFCC00";
+          ctx.fill();
+
+          ctx.restore();
+        }
+      }
+
+      window.requestAnimationFrame(draw);
+    }
   }
 
   return (
@@ -60,7 +108,7 @@ const Triangle = () => {
           </Row>  
         </div>
       </Sidebar>
-      {/* Canvas */}
+      <canvas className={styles.canvas} ref={canvas} width={500} height={500}/>
     </>
   )
 }
