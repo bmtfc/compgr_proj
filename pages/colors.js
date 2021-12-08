@@ -16,42 +16,45 @@ const Colors = () => {
   const [h, setH] = useState(0)
   const [s, setS] = useState(0)
   const [v, setV] = useState(0)
+  const [imageUrl, setImageUrl] = useState('')
 
   const [lightness, setLightness] = useState(30)
   
   const [hsl, setHsl] = useState('')
 
-  const colorBox = useRef(null)
-
   const onSetCMYK = () => {
-    const box = colorBox.current
     const hsl = cmykToHsl(c, m, y, k)
-    const color = `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`
 
-    box.style.backgroundColor = color
     setHsl(hsl)
   }
 
   const onSetHSV = () => {
-    const box = colorBox.current
     const hsl = hsvToHSL(h, s, v)
-    const color = `hsl(${hsl[0]}, ${hsl[1]}%, ${hsl[2]}%)`
 
-    box.style.backgroundColor = color
     setHsl(hsl)
   }
 
-  useEffect(() => {
-    const box = colorBox.current
-    let color= `hsl(${hsl[0]}, ${hsl[1]}%, ${lightness}%)`
+  const input = useRef(null)
 
-    box.style.backgroundColor = color
+  const onImageUpload = (e) => {
+    const [file] = input.current.files
+    if (file) {
+      setImageUrl(URL.createObjectURL(file));
+    }
+  }
+
+  useEffect(() => {
+
   }, [lightness])
+
+  
+  // imageObj = document.getElementById('image')
 
   return (
     <>
       <Sidebar title="Colors" double buttonName="Set HSV" onSetClick={onSetHSV} onButtonClick={onSetCMYK}>
         <div>
+          <input ref={input} type="file" onChange={onImageUpload}/>
           <Title level={5}>CMYK</Title>
           <div className={styles.inputsWrapper}>
             <InputNumber min={0} value={c} onChange={setC}/>
@@ -69,7 +72,10 @@ const Colors = () => {
       </Sidebar>
       {/* Canvas */}
       <div className={styles.sliderWrapper}>
-        <div className={styles.color} ref={colorBox}/>
+        <div className={styles.imagesWrapper}>
+          {imageUrl && <img id="image" src={imageUrl} alt="your image" className={styles.image} />}
+          <canvas id="canvas" width={300} height={300} />
+        </div>
         <Title level={4}>Lightness</Title>
         <Slider defaultValue={30} value={lightness} onChange={setLightness} />
       </div>
