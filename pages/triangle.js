@@ -28,7 +28,7 @@ function sleepFor(sleepDuration){
         ctx.globalCompositeOperation = 'destination-over';
         ctx.clearRect(0, 0, 500, 500);
 
-        var A = [[AX, AY, 1], [BX, BY, 1], [CX, CY, 1]]
+        var A = [[AX+250, AY+250, 1], [BX+250, BY+250, 1], [CX+250, CY+250, 1]]
 
         ctx.beginPath();
         ctx.moveTo(A[0][0], 500-A[0][1]);
@@ -39,18 +39,15 @@ function sleepFor(sleepDuration){
         ctx.fill();
         ctx.restore()
 
-        var x = 1;
-        var y = 1;
+        var x = 20;
         const M1 = [[0.866, 0.5, 1], [-0.5, 0.866, 1], [1, 1, 0]]
-        const M2 = [[1, 0, 0], [0, 1, 0], [x, y, 1]]
-        const M = multiplyMatrices(M1, M2);
-        console.log(M);
+        const M2 = [[1, 0, 0], [0, 1, 0], [x, x, 1]]
         console.log(A);
 
-        for(var i = 0; i<2; i++ ){
-          A = multiplyMatrices(A,M);
+        for(var i = 0; i<1; i++ ){
+          A = multiplyMatrices(A, M2);
+          //A = multiplyMatrices(A, M1); // rotate 30deg
           console.log(A);
-          sleepFor(2000);
           ctx.clearRect(0, 0, 500, 500);
           ctx.beginPath();
           ctx.moveTo(A[0][0], 500-A[0][1]);
