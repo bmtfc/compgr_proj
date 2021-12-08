@@ -39,8 +39,9 @@ function sleepFor(sleepDuration){
         const A = [[AX, AY, 1], [BX, BY, 1], [CX, CY, 1]];
         const x = 25;
         var k = 1;
+        var n = 8; // !має коригуватись повзунком, як сторінці з кольором
 
-        for(var i = 0; i < 8; i++){
+        for(var i = 0; i < n; i++){
           var a = k*Math.PI/24;
           console.log(a);
           var M1 = [[Math.cos(a), Math.sin(a), 1], [-Math.sin(a), Math.cos(a), 1], [1, 1, 0]]
