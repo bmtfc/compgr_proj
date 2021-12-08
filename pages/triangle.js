@@ -23,12 +23,6 @@ const Triangle = () => {
         ctx.globalCompositeOperation = 'destination-over';
         ctx.clearRect(0, 0, 500, 500);
 
-        const rad = 1 * Math.PI / 180;
-
-        const a = ((Math.PI * 2) / 3);
-
-        ctx.rotate(rad);
-
         ctx.beginPath();
         ctx.moveTo(AX, AY);
         ctx.lineTo(BX, BY);
@@ -38,15 +32,10 @@ const Triangle = () => {
         ctx.fill();
 
         ctx.restore();
-        i += 1
-        x -= 0.1
-        y -= 0.1
 
         if(i < 30) {
           window.requestAnimationFrame(draw);
         } else {
-          ctx.translate(x + 0.1 ,y + 0.1);
-
           ctx.beginPath();
           ctx.moveTo(AX, AY);
           ctx.lineTo(BX, BY);
