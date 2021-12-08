@@ -14,7 +14,7 @@ const Triangle = () => {
   const canvas = useRef(null)
 
   const onSetClick = (e) => {
-    let i = 1;
+    let i = 31;
     let x = 0;
     let y = 0;
     if (canvas.current.getContext) {
@@ -23,6 +23,9 @@ const Triangle = () => {
         ctx.globalCompositeOperation = 'destination-over';
         ctx.clearRect(0, 0, 500, 500);
 
+        AY = 500 - AY;
+        BY = 500 - BY;
+        CY = 500 - CY;
         ctx.beginPath();
         ctx.moveTo(AX, AY);
         ctx.lineTo(BX, BY);
