@@ -29,6 +29,30 @@ const Colors = () => {
   }
 
   const onSetHSV = () => {
+    var canvas = document.getElementById("canvas");
+    var context = canvas.getContext("2d");
+
+    var destX = 1;
+    var destY = 1;
+    const imageObj = document.getElementById('image')
+
+    context.drawImage(imageObj, destX, destY);
+
+    var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
+    var data = imageData.data;
+
+    for (var i = 0; i < data.length; i += 4) {
+        var red = data[i]; // red
+        var green = data[i + 1]; // green
+        var blue = data[i + 2]; // blue
+        // i+3 is alpha (the fourth element)
+        data[i] = green;
+        data[i + 1] = blue;
+        data[i + 2] = red;
+    }
+
+    // overwrite original image
+    context.putImageData(imageData, 0, 0);
     const hsl = hsvToHSL(h, s, v)
 
     setHsl(hsl)
@@ -46,9 +70,6 @@ const Colors = () => {
   useEffect(() => {
 
   }, [lightness])
-
-  
-  // imageObj = document.getElementById('image')
 
   return (
     <>
@@ -74,7 +95,7 @@ const Colors = () => {
       <div className={styles.sliderWrapper}>
         <div className={styles.imagesWrapper}>
           {imageUrl && <img id="image" src={imageUrl} alt="your image" className={styles.image} />}
-          <canvas id="canvas" width={300} height={300} />
+          <canvas className={styles.canvas} id="canvas" width={300} height={300} />
         </div>
         <Title level={4}>Lightness</Title>
         <Slider defaultValue={30} value={lightness} onChange={setLightness} />

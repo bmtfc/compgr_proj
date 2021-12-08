@@ -28,4 +28,9 @@
 
 .image {
   width: 300px;
+  height: fit-content;
+}
+
+.canvas {
+  height: fit-content;
 }
