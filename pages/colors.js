@@ -43,7 +43,7 @@ const Colors = () => {
 
     var destX = 1;
     var destY = 1;
-    var imageObj = document.getElementById('image')
+    var imageObj = document.getElementById("image")
 
     context.drawImage(imageObj, destX, destY);
 
@@ -113,7 +113,7 @@ const Colors = () => {
   }
 
   useEffect(() => {
-    var canvas = document.getElementById("canvas");
+var canvas = document.getElementById("canvas");
     var context = canvas.getContext("2d");
 
     var destX = 1;
