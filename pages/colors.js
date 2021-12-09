@@ -79,7 +79,7 @@ const Colors = () => {
 
     var destX = 1;
     var destY = 1;
-    const imageObj = document.getElementById('image')
+    var imageObj = document.getElementById('image')
 
     context.drawImage(imageObj, destX, destY);
 
@@ -118,9 +118,9 @@ var canvas = document.getElementById("canvas");
 
     var destX = 1;
     var destY = 1;
-    const imageObj = document.getElementById('image')
+    var imageObj = document.getElementById('image')
 
-    context.drawImage(imageObj, destX, destY);
+    //context.drawImage(imageObj, destX, destY);
 
     var imageData = context.getImageData(0, 0, canvas.width, canvas.height);
     var data = imageData.data;
