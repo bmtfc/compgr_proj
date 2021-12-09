@@ -3,5 +3,7 @@
   flex-direction: column;
   height: 100vh;
   justify-content: space-evenly;
-  margin: 0 550px;
+  margin-left:100px;
+  margin-right: 550px;
+  
 }

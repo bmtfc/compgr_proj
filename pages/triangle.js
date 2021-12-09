@@ -35,7 +35,7 @@ const Triangle = () => {
         ctx.lineTo(A[1][0], 500-A[1][1]);
         ctx.lineTo(A[2][0], 500-A[2][1]);
         ctx.closePath();
-        ctx.fillStyle = "#FFCC00";
+        ctx.fillStyle = "##ff00ff";
         ctx.fill();
         ctx.restore()
       }
@@ -66,7 +66,7 @@ const Triangle = () => {
           ctx.lineTo(A1[1][0], 500-A1[1][1]);
           ctx.lineTo(A1[2][0], 500-A1[2][1]);
           ctx.closePath();
-          ctx.fillStyle = "#FFCC00";
+          ctx.fillStyle = "##ff00ff";
           ctx.fill();
           ctx.restore()
           k++;
