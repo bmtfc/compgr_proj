@@ -13,7 +13,7 @@ const Pfractal = () => {
 
   return (
     <>
-      <Sidebar title="Brownian motion fractal" onSetClick={onSetClick} />
+      <Sidebar title="Plasma fractal" onSetClick={onSetClick} />
       <canvas className={styles.canvas} id="canvas" width={500} height={500} />
     </>
   )

@@ -1,6 +1,6 @@
 import Sidebar from '../components/sidebar'
-import { Row, Col, InputNumber } from 'antd';
-import { useRef, useState } from 'react';
+import { Row, Col, InputNumber, Slider } from 'antd';
+import { useRef, useState, useEffect } from 'react';
 import styles from '../styles/Bfractal.module.css'
 import { multiplyMatrices } from '../utils/matrix';
 
@@ -13,15 +13,18 @@ const Triangle = () => {
   const [CX, setCX] = useState(0)
   const [CY, setCY] = useState(0)
 
+  const [iters, setIters] = useState(5)
+
   const canvas = useRef(null)
 
-function sleepFor(sleepDuration){
+  function sleepFor(sleepDuration){
     var now = new Date().getTime();
     while(new Date().getTime() < now + sleepDuration){ /* Do nothing */ }
 }
 
+  const A = [[AX, AY, 1], [BX, BY, 1], [CX, CY, 1]]; 
+
   const onSetClick = (e) => {
-    let i = 31;
     if (canvas.current.getContext) {
       const draw = () => {
         const ctx = canvas.current.getContext('2d');
@@ -35,13 +38,17 @@ function sleepFor(sleepDuration){
         ctx.fillStyle = "#FFCC00";
         ctx.fill();
         ctx.restore()
+      }
+      window.requestAnimationFrame(draw);
+    }
+  }
 
-        const A = [[AX, AY, 1], [BX, BY, 1], [CX, CY, 1]];
-        const x = 25;
-        var k = 1;
-        var n = 8; // !має коригуватись повзунком, як сторінці з кольором
-
-        for(var i = 0; i < n; i++){
+  useEffect(() => {
+    const ctx = canvas.current.getContext('2d');
+    ctx.globalCompositeOperation = 'destination-over';
+    const x = 15;
+    var k = 1;
+    for(var i = 0; i < iters; i++){
           var a = k*Math.PI/24;
           console.log(a);
           var M1 = [[Math.cos(a), Math.sin(a), 1], [-Math.sin(a), Math.cos(a), 1], [1, 1, 0]]
@@ -64,14 +71,12 @@ function sleepFor(sleepDuration){
           ctx.restore()
           k++;
         }
-      }
-      window.requestAnimationFrame(draw);
-    }
-  }
+  }, [iters])
 
   return (
     <>
       <Sidebar title="Triangle" onSetClick={onSetClick}>
+        <Slider defaultValue={5} min={0} max={12} step={1} value={iters} onChange={setIters} />
         <div className={styles.tableWrapper}>
           <Row gutter={18}>
             <Col span={4}>

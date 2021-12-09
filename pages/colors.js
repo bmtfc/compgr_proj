@@ -157,7 +157,7 @@ const Colors = () => {
           </div>
         </div>
       </Sidebar>
-      {/* Canvas */}
+      {/* Сanvas */}
       <div className={styles.sliderWrapper}>
         <div className={styles.imagesWrapper}>
           {imageUrl && <img id="image" src={imageUrl} alt="your image" className={styles.image} />}
